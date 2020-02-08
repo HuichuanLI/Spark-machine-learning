@@ -11,6 +11,7 @@
 ## Spark 实现wordcount
 配置spark，需要加入spark的jar和scala-sdk
 
+[wordCount生成](./src/WordCount.scala)
 
 ## Spark 的矩阵和向量
 
@@ -24,5 +25,14 @@
 
 #### p 范数
 
-![](./photo/01.png
-)
+![](./photo/01.png)
+
+[矩阵](./src/Matrix.scala)
+
+[向量](./src/Vector.scala)
+
+## 基本统计模块
+- Spark的基础统计模块即MLlib组件中的BasicStatistics部分 
+- BasicStatistics主要包括CorreIation与Hypothesistesting等 
+- 多被封装在org.apache.spark.mllib.stat._中
+
