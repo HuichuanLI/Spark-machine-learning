@@ -89,5 +89,18 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
 
 [支持向量机](./src/SVM.scala)
 
-- 决策树
-   - spark 使用ID3 决策树实现
+### 决策树
+- spark 使用ID3 决策树实现
+
+[决策树1](./src/DecisionTree.scala)
+   
+[决策树2](./src/DT2.scala)
+
+
+## Spark 聚类算法
+
+- Kmeans 算法
+
+
+- LDA 算法
+ 
