@@ -141,4 +141,4 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
 
 ![](./photo/05.png)
 
-[](./src/ALS.scala)
+[推荐系统ALS](./src/ALS.scala)
