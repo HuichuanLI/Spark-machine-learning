@@ -4,3 +4,11 @@
 out/
 
 spark-machine-learning.iml
+
+*.crc
+
+*.parquet
+
+src/RecommendSystem/als/ml-als-model/data/product/
+
+src/RecommendSystem/als/ml-als-model/metadata/

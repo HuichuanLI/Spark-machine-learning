@@ -142,3 +142,123 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
 ![](./photo/05.png)
 
 [推荐系统ALS](./src/ALS.scala)
+
+
+
+## Spark 实战项目
+
+        
+    Spark MLlib（机器学习库）
+        使用Spark框架将常见机器学习算法实现，以供使用，类似Python语言中机器学习库sk-learn。
+    -1. 提供API以供使用
+        从Spark 2.0开始 官方推荐使用基于DataFrame API算法库
+        -a. 基于RDD实现算法库
+            org.apache.spark.mllib
+            http://spark.apache.org/docs/2.2.0/mllib-guide.html#mllib-rdd-based-api
+        -b. 基于DataFrame实现算法库
+            org.apache.spark.ml
+            http://spark.apache.org/docs/2.2.0/ml-guide.html
+    
+    -2. 机器学习算法
+        -a. 代码-理论-代码
+        -b. 算法分类（十大经典机器学习算法）
+            物以类聚，人以群分
+            -i. 分类算法Classification  - 预测类别，离散值
+                -a. 决策树
+                    DecisionTree
+                -b. 逻辑回归
+                    LogisticRegression
+                -c. 支持向量机
+                    SVM
+                -d. 朴素贝叶斯
+                    NaiveBayes
+                应用：
+                    垃圾邮件分类
+                    广告是否点击
+            -ii. 回归算法Regression  - 预测连续值
+                -a. 决策树
+                    DecisionTree
+                -b. 线性回归
+                    LinearRegression：
+                        L1正则化 -> Lasso
+                        L2正则化 -> RidgeRegression
+                应用:
+                    预测某日共享单车出租次数
+                    预测某个时间订单量
+                    预测某天天气气温
+            -iii. 聚类算法Clustering
+                K-Means（K-均值算法）
+            -iv. 推荐算法（Collaborative filtering）
+                -a. 协同过滤算法
+                    ALS（最小交替二乘法）
+                        Alternating Least Squares
+                -b. 关联规则算法（购物篮算法）
+                    AssociationRules
+                    FPGrowth
+            -v. 集成Ensemble学习算法（融合学习算法）
+                多个模型进行预测，“合并”预测的结果
+                -a. 随机森林算法（Random Forests）
+                    N 棵树
+                -b. 梯度提升算法（Gradient-Boosted Trees）
+                    底层RF
+                    
+## 推荐系统
+    推荐引擎：
+        通过探寻不同物品（产品Item、Product）或者不同用户之间喜好的联系，用于预测用户喜好的物品。
+    
+    以亚马逊图书推荐为例：
+        Spark机器学习 
+            -a. 推荐一： 1 Product
+                经常一起购买的商品
+            -b. 推荐二： 5 * 12 = 60 Product
+                浏览此商品的顾客也同时浏览
+            -c. 推荐三： 5 * 20 = 100 Product
+                购买此商品的顾客也同时购买
+        
+    以JD商品推荐为例：
+        樱桃（Cherry）MX-Board 2.0 G80-3801机械键盘
+            -a. 推荐一：人气配件
+                购买此Product同时购买Product
+            -b. 推荐二：针对不同配件
+                推荐TopKey个Product
+            -c. 推荐三：达人选购
+                购买最多类似Product，推荐
+            -d. 推荐四：看了又看
+                同时浏览的类似Product
+            -e. 推荐五：键盘热销榜
+                同价位、同品牌、总排行
+                
+    推荐系统的核心：
+         产品（商品Product、Item）
+         系统：产生记录用户行为数据（浏览数据和购买数据）
+         算法：推荐系统算法和分类、回归与聚类算法
+         
+    推荐系统组成：
+        数据
+        算法（online在线&offline离线)
+        Message System -> KAFKA
+        Search	engine
+        NoSQL -> HBase、Redis
+        分布式计算 -> Spark 
+        效果评测 -> 购买量，销售额 是否增加
+        
+    协同过滤推荐算法CF：
+        思想：
+            通过观察所有用户User给产品Product/Item的评价Rating来判断每个用户的喜好Favorite
+        功能：
+            -1. 针对用户来说（User-CF）：
+                推荐哪些电影给用户，你喜欢呢？你会观看哪些？
+            -2. 针对电影来说（Item-CF）：
+                推荐给哪些用户？哪些用户会喜欢？
+                
+    用户对产品的评价（评分）Rating：
+         -a. 显示评价（评分） ， 分数越高，喜好程度越高
+             淘票票购买电影票，观看电影以后，直接评分
+             使用滴滴打车付款以后，直接评分
+             评分是最直接和最直观
+         -b. 隐式评价（评分），次数越多，某种程度上说，喜好程度越高
+             针对网易音乐网站来数，听某首歌曲的次数
+             某个网站某类上的浏览次数
+             网站点击量、视频播放数、音乐收藏数
+             
+![](./photo/06.png)
