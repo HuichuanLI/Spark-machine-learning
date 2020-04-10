@@ -262,3 +262,55 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
              网站点击量、视频播放数、音乐收藏数
              
 ![](./photo/06.png)
+
+
+
+## 分类算法
+    Classification
+        http://spark.apache.org/docs/2.2.0/mllib-classification-regression.html
+        -a. 二分类（Binary Classification）
+            linear SVMs
+            logistic regression
+            decision trees
+            naive Bayes
+        -b. 多分类
+            naive Bayes
+            decision trees
+        -c. 集成学算法
+            -i. Bagging
+                random forests
+            -ii. Boosting
+                gradient-boosted trees
+            -d. 在Spark MLlib中 
+                决策树DT、随机森林RF、梯度提升决策树GBDT，都是RF算法的实现。
+                DT模型底层是RF模型中一棵树，GBT模型底层就是特殊优化DT模型。
+    决策树算法：
+        依据特征值及预测类别标签值，构建一个棵树DecisionTree。
+        核心点：
+            如何选取某个特征值进行判断分类？？？？
+        算法核心（不纯度）：
+            分类：
+                - 熵（香农熵）
+                - 基尼系数gini
+            回归：
+                - 方差
+                
+                
+    类别特征数据转换：
+        使用1-of-K或OneHotCoding
+    以sex性别来说：
+                male            female
+        sex     
+    -i. 获取类别特征的类别数
+        类别总数categoryLength
+    -i+. 获取类别的Map集合映射
+        val categoryAgeMap = Map("male" -> 0, "female" -> 1)
+    -ii. 以类别长度创建Double数值类型的数组
+        Array(0.0, 0.0)
+              male  female
+    -iii. 依据当前特征数据的值，给予数组对应下标赋值为1.0
+        假设，小明，属于男性male
+            val sexFeature = Array(1.0, 0.0)
+        假设，小红，属于女性female
+            val sexFeature = Array(0.0, 1.0)
+    
