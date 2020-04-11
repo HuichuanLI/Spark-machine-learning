@@ -367,7 +367,21 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
             - 第二道门槛，衡量的是“质”，设置最小的置信度筛选可靠的规则，此外依据置信度降序排序，获取TopKey关联物品。
         -iii. 提升度：
             含有Y的条件下，同时含有X的概率，与X总体发生的概率之比
-   
+    
+    
+    数据挖掘（机器学习算法）中关联算法：
+        -a. FP-growth(FP-Tree)：项集数据
+            Frequent Pattern: 频繁模式
+        -b. Apriori
+            用来找出数据值中频繁出现的数据集合
+        -c. PrefixSpan：序列数据
+            序列模式：Sequence Pattern Mining，针对频繁序列（Frequent Sequences）
+            用处：购买行为预测、欺诈甄别、故障预测、Web用户访问预测、人类行为规律等等
+            Prefix：前缀
+            https://www.cnblogs.com/pinard/p/6323182.html
+            子序列与频繁序列
+            PrefixSpan全称：
+                Prefix-Projected Pattern Growth，即前缀投影的模型挖掘
     
  ### SparkMlib
     在Spark 2.x中官方推荐使用基于DataFrame的Spark ML机器学习库：
@@ -388,4 +402,5 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
             Estimator模型学习器/估计器: fit
                 就是算法，将数据集应用到算法中生成一个转换器（模型）
                 
+    
          
