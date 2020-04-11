@@ -314,3 +314,78 @@ Spark实现求解该模型的算法是pool adjacent violators算法 (PAVA)
         假设，小红，属于女性female
             val sexFeature = Array(0.0, 1.0)
     
+## 回归
+    对于线性回归算法来说：
+        什么时候会出现过拟合的现象或模型泛化能很差呢？？？？？
+        -a. 数据集数量很少
+        -b. 数据中特征数很多
+    解决方案：
+        -a. 第一种方案：
+            选取较少的数据的特征
+        -b. 第二种方案：
+            正则化 
+            -i. L1 正则化：对theta值，先绝对值，再累加和
+            L1可以使得theta趋近于0
+            -ii. L2 正则化：对theta值，先平方，再求和，最后平方根
+    
+    =========================================================
+    梯度下降算法（SGD随机梯度下降）来说：
+        -a. 迭代次数
+            numIterations: Int，需要用户指定，从源码中可以算法的附属构造方法中发现默认值为100
+        -b. 步长
+            stepSize: Double，默认值为1.0
+        -c. 数据集比例
+            miniBatchFraction：Double，默认值为1.0
+            
+ 
+## 关联规则
+        
+    推荐系统算法：
+        协同过滤算法 -> 基于模型协同过滤算法ALS - 矩阵分解
+    ALS 算法核心：
+        用户User对物品Item的评价（反馈）
+        评价（反馈）：分为显示评价和隐式评价
+    
+    关联规则算法：用于推荐
+        -a. 经典案例：
+            沃尔玛超市: 啤酒与尿布
+        -b. 具体算法：
+            Apriori、FP-Growing、PrefixSpan
+        -c. FP-growth
+            FP：Frequent Pattern，频度模式
+    举例说明：
+        假如10000个消费者购买了商品，购买尿布1000个，购买啤酒2000个，购买面包500个，同时购买尿布和啤酒800个，同时购买尿布和面包100个。
+        -i. 支持度：此值越大，表明关联在一起的可能越大
+            表示同时购买某两个或多个物品出现的次数。
+            Support(尿布&啤酒) = 800 / 10000 = 8%
+            Support(尿布&面包) = 100 / 10000 = 1%
+            - 第一道门槛，衡量是多少，可以理解为“出境率”，通常设置一个最小的支持度，过滤掉“出镜率”较低的无意义规则。
+        -ii. 置信度：此值越高，表明关联在一起的可能越大
+            属于概率值统计，在X发生的条件下，Y发生的概率
+            Confidence(啤酒｜尿布) = 800/1000 = 80%
+            Confidence(面包｜尿布) = 100/1000 = 10%
+            - 第二道门槛，衡量的是“质”，设置最小的置信度筛选可靠的规则，此外依据置信度降序排序，获取TopKey关联物品。
+        -iii. 提升度：
+            含有Y的条件下，同时含有X的概率，与X总体发生的概率之比
+   
+    
+ ### SparkMlib
+    在Spark 2.x中官方推荐使用基于DataFrame的Spark ML机器学习库：
+        DataFrame-based API 
+        - 第一点：
+            算法中所有数据集格式为DataFrame 
+                DataFrame = Dataset[Row] = RDD + Schame 
+        - 第二点：
+            模型Model称为转换器Transformer：transform
+                类似RDD中转换函数，将DataFrame转换为另外一个DataFrame
+            转换器对DataFrame中某些字段值进行转换为另外新的字段的值
+                DataFrame[label, features]
+                    ==transformer==>
+                         DataFrame[label, features, predict]
+            特征提取的工具类也称为转换器
+                http://spark.apache.org/docs/2.2.0/ml-features.html#extracting-transforming-and-selecting-features
+        - 第三点:
+            Estimator模型学习器/估计器: fit
+                就是算法，将数据集应用到算法中生成一个转换器（模型）
+                
+         
